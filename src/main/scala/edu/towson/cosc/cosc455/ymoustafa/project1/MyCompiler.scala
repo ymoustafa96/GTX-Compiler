@@ -3,36 +3,43 @@ package edu.towson.cosc.cosc455.ymoustafa.project1
 object MyCompiler {
 
   var currentToken : String = ""
+  var fileContents : String = ""
+  var filename : String = ""
+
+  val Scanner = new MyLexicalAnalyzer
+  val Parser = new MySyntaxAnalyzer
+  val SemanticAnalyzer = new MySemanticAnalyzer
+  var position : Int = -1
 
   def main(args: Array[String]): Unit = {
+    checkFile(args)
+    filename = args(0)
+    readFile(args(0))
 
-    // check if an input file is provided
+    Scanner.getNextToken()
+    Parser.gittex()
+  }
+
+
+  def readFile(file : String) = {
+    val source = scala.io.Source.fromFile(file)
+    fileContents = try source.mkString finally source.close()
+  }
+
+  def checkFile(args : Array[String]) = {
     if (args.length == 0) {
       //USAGE ERROR
       println("USAGE ERROR: Must provide an input file.")
-      System.exit(0)
+      System.exit(1)
     }
-
-    if (!checkFilenameExtentsion(args(0))) {
-      //USAGE ERROR
+    else if (args.length != 1) {
+      println("USAGE ERROR: Wrong number of args.")
+      System.exit(1)
+    }
+    else if (!checkFilenameExtension(args(0))) {
       println("USAGE ERROR: Input file must be .gtx.")
-      System.exit(0)
+      System.exit(1)
     }
-
-    val Scanner = new MyLexicalAnalyzer
-    val Parser = new MySyntaxAnalyzer
-
-    setCurrentToken(Scanner.getNextToken())
-    Parser.gittex()
-
-    // .....
-    // If it gets here, it is compiled
-    // post processing
-
   }
-
-  def checkFilenameExtentsion(filename : String) : Boolean = filename.endsWith(".gtx")
-
-  def getCurrentToken() : String = this.currentToken
-  def setCurrentToken(t : String) : Unit = this.currentToken = t
+  def checkFilenameExtension(filename : String) : Boolean = filename.endsWith(".gtx")
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ca7a7c5-dbb4-43f8-b932-8749aa010ed5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/MyCompiler.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/MyCompiler.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -52,25 +52,25 @@
         <counts>
           <entry key="BNF" value="197" />
           <entry key="gtx" value="14" />
-          <entry key="scala" value="782" />
+          <entry key="scala" value="786" />
           <entry key="txt" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="223" />
-          <entry key="Scala" value="782" />
+          <entry key="Scala" value="786" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/MyCompiler.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+            <state relative-caret-position="167">
+              <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -84,7 +84,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/Tokens.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
@@ -151,16 +151,16 @@
         <option value="$PROJECT_DIR$/bad.txt" />
         <option value="$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/MyLexicalAnalyzer.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/LexicalAnalyzer.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/MyCompiler.scala" />
         <option value="$PROJECT_DIR$/good.gtx" />
         <option value="$PROJECT_DIR$/gittex.BNF" />
         <option value="$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/Tokens.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/MyCompiler.scala" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1680" />
-    <option name="height" value="985" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -211,7 +211,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541270918266" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541274724341" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -312,9 +312,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26495728" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26495728" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -330,7 +329,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32959184" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" order="8" weight="0.32959184" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32959184" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32959184" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="11" weight="0.3" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32959184" />
@@ -391,13 +390,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$USER_HOME$/Documents/TU/Fall 2018 Semester TU/COSC 436/Assignments/Assignment 3/Archive/Menu.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/MyCompiler.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/SyntaxAnalyzer.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -419,13 +411,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/MyLexicalAnalyzer.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/LexicalAnalyzer.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -440,10 +425,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/MyLexicalAnalyzer.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/Tokens.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc/cosc455/ymoustafa/project1/MyCompiler.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
         </state>
       </provider>
     </entry>
