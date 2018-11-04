@@ -18,6 +18,9 @@ object MyCompiler {
 
     Scanner.getNextToken()
     Parser.gittex()
+
+    // Prints test cases in terminal
+    print(fileContents)
   }
 
 

@@ -118,7 +118,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
         || nextChar.toString.equals(Tokens.PARAE)
         || nextChar.toString.equals(Tokens.EQSIGN)
         || nextChar.equals('\\')) {
-        //Will decrement index so special characters aren't skipped
+        // Will decrement index so special characters aren't skipped
         MyCompiler.position -= 1
       }
       MyCompiler.currentToken = tokenString
