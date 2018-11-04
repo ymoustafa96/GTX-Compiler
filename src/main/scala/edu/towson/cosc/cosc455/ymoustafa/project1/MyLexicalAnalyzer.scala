@@ -62,7 +62,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
           if (MyCompiler.position - fileLength != 0) {
             MyCompiler.position -= 1
             getNextToken()
-            println("LEXICAL ERROR: Cannot have any symbols after \\END")
+            println("SYNTAX ERROR: Cannot have any text after \\END")
             System.exit(1)
           }
         }

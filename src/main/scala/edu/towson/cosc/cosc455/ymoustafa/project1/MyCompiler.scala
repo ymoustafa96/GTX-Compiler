@@ -20,7 +20,10 @@ object MyCompiler {
     Parser.gittex()
 
     // Prints test cases in terminal
-    print(fileContents)
+    // print(fileContents)
+
+    // Calls toHTML() function in MySemanticAnalyzer to create and run HTML file
+    SemanticAnalyzer.toHTML()
   }
 
 
