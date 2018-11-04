@@ -30,6 +30,8 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
     if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.TITLEB)) {
       synParser.push(MyCompiler.currentToken)
       MyCompiler.Scanner.getNextToken()
+      //calls for the regular text check
+      regularText()
       if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.BRACKETE)) {
         synParser.push(MyCompiler.currentToken)
         MyCompiler.Scanner.getNextToken()
@@ -59,6 +61,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
       body()
     }
     else {
+      innerText()
       body()
     }
   }
@@ -70,6 +73,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
       if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.DEFB)) {
         variableDefine()
       }
+      innerText()
 
       if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.PARAE)) {
         synParser.push(MyCompiler.currentToken)
@@ -90,6 +94,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
     if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.HEADING)) {
       synParser.push(MyCompiler.currentToken)
       MyCompiler.Scanner.getNextToken()
+      regularText()
     }
   }
 
@@ -97,9 +102,11 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
     if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.DEFB)) {
       synParser.push(MyCompiler.currentToken)
       MyCompiler.Scanner.getNextToken()
+      regularText()
       if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.EQSIGN)) {
         synParser.push(MyCompiler.currentToken)
         MyCompiler.Scanner.getNextToken()
+        regularText()
         if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.BRACKETE)) {
           synParser.push(MyCompiler.currentToken)
           MyCompiler.Scanner.getNextToken()
@@ -121,6 +128,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
     if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.USEB)) {
       synParser.push(MyCompiler.currentToken)
       MyCompiler.Scanner.getNextToken()
+      regularText()
       if(MyCompiler.currentToken.equalsIgnoreCase(Tokens.BRACKETE)) {
         synParser.push(MyCompiler.currentToken)
         MyCompiler.Scanner.getNextToken()
@@ -136,6 +144,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
     if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.BOLD)) {
       synParser.push(MyCompiler.currentToken)
       MyCompiler.Scanner.getNextToken()
+      regularText()
       if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.BOLD)) {
         synParser.push(MyCompiler.currentToken)
         MyCompiler.Scanner.getNextToken()
@@ -158,12 +167,14 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
     if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.LINKB)) {
       synParser.push(MyCompiler.currentToken)
       MyCompiler.Scanner.getNextToken()
+      regularText()
       if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.BRACKETE)) {
         synParser.push(MyCompiler.currentToken)
         MyCompiler.Scanner.getNextToken()
         if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.ADDRESSB)) {
           synParser.push(MyCompiler.currentToken)
           MyCompiler.Scanner.getNextToken()
+          regularText()
           if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.ADDRESSE)) {
             synParser.push(MyCompiler.currentToken)
             MyCompiler.Scanner.getNextToken()
@@ -189,12 +200,14 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
     if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.IMAGEB)) {
       synParser.push(MyCompiler.currentToken)
       MyCompiler.Scanner.getNextToken()
+      regularText()
       if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.BRACKETE)) {
         synParser.push(MyCompiler.currentToken)
         MyCompiler.Scanner.getNextToken()
         if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.ADDRESSB)) {
           synParser.push(MyCompiler.currentToken)
           MyCompiler.Scanner.getNextToken()
+          regularText()
           if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.ADDRESSE)) {
             synParser.push(MyCompiler.currentToken)
             MyCompiler.Scanner.getNextToken()
@@ -221,5 +234,65 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
       synParser.push(MyCompiler.currentToken)
       MyCompiler.Scanner.getNextToken()
     }
+  }
+
+  def innerText(): Unit = {
+    if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.USEB)) {
+      variableUse()
+      innerText()
+    }
+    else if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.HEADING)) {
+      heading()
+      innerText()
+    }
+    else if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.BOLD)) {
+      bold()
+      innerText()
+    }
+    else if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.LISTITEM)) {
+      listItem()
+      innerText()
+    }
+    else if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.IMAGEB)) {
+      image()
+      innerText()
+    }
+    else if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.LINKB)) {
+      link()
+      innerText()
+    }
+    else if (MyCompiler.currentToken.equalsIgnoreCase(Tokens.NEWLINE)) {
+      newline()
+      innerText()
+    }
+    else if (textCheck()) {
+      synParser.push(MyCompiler.currentToken)
+      MyCompiler.Scanner.getNextToken()
+      innerText()
+    }
+  }
+
+  // Added the regular text needed for title, body, paragraph, etc.
+  def regularText(): Unit = {
+    if (textCheck()) {
+      synParser.push(MyCompiler.currentToken)
+      MyCompiler.Scanner.getNextToken()
+      regularText()
+    }
+    else if (MyCompiler.position == MyCompiler.Scanner.fileLength) {
+      // Do nothing
+    }
+  }
+
+  def textCheck(): Boolean = {
+    if (MyCompiler.currentToken.contains(':')
+      || MyCompiler.currentToken.contains('.')
+      || MyCompiler.currentToken.contains(',')) {
+      return true
+    }
+    if (MyCompiler.currentToken.contains("\n")) {
+      return MyCompiler.currentToken.length == MyCompiler.currentToken.filter(_.isLetterOrDigit).length + 1
+    }
+    MyCompiler.currentToken.length == MyCompiler.currentToken.filter(_.isLetterOrDigit).length
   }
 }

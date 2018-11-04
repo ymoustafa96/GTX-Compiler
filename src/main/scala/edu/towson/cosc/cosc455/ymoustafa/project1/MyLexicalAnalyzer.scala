@@ -22,6 +22,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
     tokenString = ""
 
     getChar()
+    emptySpace()
 
     if (fileLength != MyCompiler.position) {
       //do nothing
@@ -33,6 +34,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
       }
       else if (Tokens.LISTITEM.contains(nextChar)) {
         addChar()
+        tokenString += readAll()
       }
       else if (Tokens.ADDRESSE.contains(nextChar)) {
         addChar()
@@ -40,6 +42,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
       }
       else if (Tokens.SPECIALCHAR(3) == nextChar) {
         addChar()
+        tokenString += readAll()
         if (Tokens.SPECIALCHAR(3) == nextChar) {
           addChar()
           MyCompiler.currentToken = tokenString
@@ -55,6 +58,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
           addChar()
         }
         if (Tokens.DOCE == tokenString.toUpperCase) {
+          emptySpace()
           if (MyCompiler.position - fileLength != 0) {
             MyCompiler.position -= 1
             getNextToken()
@@ -65,6 +69,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
       }
       else if (Tokens.HEADING.contains(nextChar)) {
         addChar()
+        tokenString += readAll()
       }
       else if (Tokens.IMAGEB.charAt(0) == nextChar) {
         addChar()
@@ -107,6 +112,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
     }
     else if (nextChar.isLetterOrDigit ||nextChar==':' || nextChar=='.' || nextChar==',') {
       addChar()
+      tokenString += readAll()
       if (nextChar.toString.equals(Tokens.ADDRESSE)
         || nextChar.toString.equals(Tokens.BRACKETE)
         || nextChar.toString.equals(Tokens.PARAE)
@@ -130,5 +136,33 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
     else {
       return Tokens.KEYWORDS.contains(tokenString.toUpperCase)
     }
+  }
+
+  // Calls getChar() until an empty space Char is found
+  def emptySpace() : Unit = {
+    while (Tokens.ENDOFLINE.contains(nextChar) && MyCompiler.position < fileLength) {
+      getChar()
+    }
+  }
+
+  // Reads within text until end of word, line, or token
+  def readAll() : String = {
+    var text: String = ""
+    getChar()
+
+    while (MyCompiler.position < fileLength && !Tokens.ENDOFLINE.contains(nextChar) && !Tokens.SPECIALCHAR.contains(nextChar)) {
+      text += nextChar
+      getChar()
+    }
+    if (Tokens.ENDOFLINE(0) == nextChar) {
+      text += nextChar
+    }
+    if (Tokens.ENDOFLINE(1) == nextChar) {
+      getChar()
+      if (Tokens.ENDOFLINE(2) == nextChar) {
+        text += nextChar
+      }
+    }
+    return text
   }
 }
