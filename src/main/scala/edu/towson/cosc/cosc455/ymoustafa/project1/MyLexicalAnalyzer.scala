@@ -18,7 +18,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
   }
 
   def getNextToken(): Unit = {
-    fileLength = MyCompiler.fileContents.length -1
+    fileLength = MyCompiler.fileContents.length - 1
     tokenString = ""
 
     getChar()
@@ -121,10 +121,10 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
 
   def lookup(): Boolean = {
     var temp: String = ""
-    if (tokenString.substring(tokenString.length-1,tokenString.length) == "\n"
-      || tokenString.substring(tokenString.length-1,tokenString.length) == "\r"
-      || tokenString.substring(tokenString.length-1,tokenString.length) == "\t") {
-      temp = tokenString.toUpperCase.substring(0,tokenString.length-1)
+    if (tokenString.substring(tokenString.length - 1,tokenString.length) == "\n"
+      || tokenString.substring(tokenString.length - 1,tokenString.length) == "\r"
+      || tokenString.substring(tokenString.length - 1,tokenString.length) == "\t") {
+      temp = tokenString.toUpperCase.substring(0,tokenString.length - 1)
       return Tokens.KEYWORDS.contains(temp)
     }
     else {
