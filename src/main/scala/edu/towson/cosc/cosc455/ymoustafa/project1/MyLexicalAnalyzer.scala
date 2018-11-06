@@ -1,15 +1,17 @@
 package edu.towson.cosc.cosc455.ymoustafa.project1
 
 class MyLexicalAnalyzer extends LexicalAnalyzer{
+  // variable declarations
   var nextChar : Char = ' '
   var tokenString : String = ""
   var fileLength : Int = 0
 
-  //Adds chars to token string one at a time
+  // Adds chars to token string one at a time
   def addChar(): Unit = {
     tokenString += nextChar
   }
 
+  // Gets the next char and puts it in the current position
   def getChar(): Unit = {
     if (MyCompiler.position < fileLength) {
       MyCompiler.position += 1
@@ -17,6 +19,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
     }
   }
 
+  // Retrieves next token
   def getNextToken(): Unit = {
     fileLength = MyCompiler.fileContents.length - 1
     tokenString = ""
@@ -27,6 +30,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
     if (fileLength != MyCompiler.position) {
       //do nothing
     }
+    // checks for special characters; '*', '+', '=', '\\', '!', '#', '[', ']', '(', ')'
     if (Tokens.SPECIALCHAR.contains(nextChar)) {
       if (Tokens.BOLD.contains(nextChar)) {
         addChar()
@@ -57,6 +61,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
         if (Tokens.BRACKETE.contains(nextChar)) {
           addChar()
         }
+        // cannot have text after DOCE token, will throw a Syntax Error
         if (Tokens.DOCE == tokenString.toUpperCase) {
           emptySpace()
           if (MyCompiler.position - fileLength != 0) {
@@ -67,10 +72,12 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
           }
         }
       }
+      // checks for Heading token; '#'
       else if (Tokens.HEADING.contains(nextChar)) {
         addChar()
         tokenString += readAll()
       }
+      // checks for IMAGEB token; '!['
       else if (Tokens.IMAGEB.charAt(0) == nextChar) {
         addChar()
         getChar()
@@ -89,6 +96,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
             }
           }
         }
+        // throws a Lexical Error if illegal character (not '[') followed after '!' for Heading token
         else {
           println("LEXICAL ERROR: Illegal character after '!'; '" + nextChar + "'")
           System.exit(1)
@@ -105,12 +113,14 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
         }
         else MyCompiler.currentToken = tokenString
       }
+      // throws a Lexical Error if illegal token is found
       else {
         println("LEXICAL ERROR: Illegal token: '" + tokenString + "'")
         System.exit(1)
       }
     }
-    else if (nextChar.isLetterOrDigit ||nextChar==':' || nextChar=='.' || nextChar==',') {
+    // checks if nextChar is a letter, number, ':', '.', or ','
+    else if (nextChar.isLetterOrDigit ||nextChar == ':' || nextChar == '.' || nextChar == ',') {
       addChar()
       tokenString += readAll()
       if (nextChar.toString.equals(Tokens.ADDRESSE)
@@ -125,6 +135,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer{
     }
   }
 
+  // Looks up tokens and stores as temp
   def lookup(): Boolean = {
     var temp: String = ""
     if (tokenString.substring(tokenString.length - 1,tokenString.length) == "\n"

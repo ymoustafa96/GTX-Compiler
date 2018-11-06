@@ -1,10 +1,15 @@
 package edu.towson.cosc.cosc455.ymoustafa.project1
 
 object MyCompiler {
+  // check args *
+  // check file extension
+  // initializations
+  // get first token
+  // call start state
 
-  var currentToken : String = ""
+  var currentToken : String = "" // bin to put token in
   var fileContents : String = ""
-  var filename : String = ""
+  var filename : String = "" // takes input for filename
 
   val Scanner = new MyLexicalAnalyzer
   val Parser = new MySyntaxAnalyzer
@@ -16,8 +21,8 @@ object MyCompiler {
     filename = args(0)
     readFile(args(0))
 
-    Scanner.getNextToken()
-    Parser.gittex()
+    Scanner.getNextToken() // calls getNextToken to tokenize file
+    Parser.gittex() // calls start state
 
     // Prints test cases in terminal
     // print(fileContents)
@@ -26,12 +31,13 @@ object MyCompiler {
     SemanticAnalyzer.toHTML()
   }
 
-
+  // reads input file
   def readFile(file : String) = {
     val source = scala.io.Source.fromFile(file)
     fileContents = try source.mkString finally source.close()
   }
 
+  // checks file args
   def checkFile(args : Array[String]) = {
     if (args.length == 0) {
       //USAGE ERROR
